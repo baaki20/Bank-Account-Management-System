@@ -79,6 +79,11 @@ public class BankController {
 
     @FXML
     public void handleDeposit() {
+        if (currentAccount == null) {
+            showAlert("Error", "No account found. Please create an account first.", Alert.AlertType.WARNING);
+            return;
+        }
+
         double amount = 0;
         try {
             amount = Double.parseDouble(transactionAmountField.getText().trim());
@@ -96,6 +101,11 @@ public class BankController {
 
     @FXML
     public void handleWithdraw() {
+        if (currentAccount == null) {
+            showAlert("Error", "No account found. Please create an account first.", Alert.AlertType.WARNING);
+            return;
+        }
+
         double amount = 0;
         try {
             amount = Double.parseDouble(transactionAmountField.getText().trim());
@@ -107,7 +117,6 @@ public class BankController {
             return;
         }
 
-        // Ensure there are sufficient funds
         if (currentAccount.getBalance() < amount) {
             showAlert("Error", "Insufficient funds for withdrawal.", Alert.AlertType.WARNING);
             return;
