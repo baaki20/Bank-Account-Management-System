@@ -61,19 +61,42 @@ public class BankController {
         switch (type) {
             case "Savings":
                 currentAccount = new SavingsAccount("S" + System.currentTimeMillis(), name, balance);
+                SavingsAccount sa = (SavingsAccount) currentAccount;
+
+                double saInterest = sa.calculateInterest(); // Assuming this method exists
+                showAlert("Account creation",
+                        "Savings Account created for " + name + "\n" +
+                                "Interest Earned (est.): " + saInterest + "\n" +
+                                "Projected Balance: " + (balance + saInterest),
+                        Alert.AlertType.INFORMATION);
                 break;
+
             case "Current":
                 currentAccount = new CurrentAccount("C" + System.currentTimeMillis(), name, balance);
                 break;
             case "Fixed Deposit":
                 currentAccount = new FixedDepositAccount("F" + System.currentTimeMillis(), name, balance, 30, 5.0);
+                FixedDepositAccount fd = (FixedDepositAccount) currentAccount;
+
+                double fdInterest = fd.calculateMaturityAmount() - balance;
+                showAlert("Account creation",
+                        "Fixed Deposit Account created for " + name + "\n" +
+                                "Interest Earned: " + fdInterest + "\n" +
+                                "Maturity Amount: " + fd.calculateMaturityAmount() + "\n" +
+                                "Maturity Date: " + fd.getMaturityDate(),
+                        Alert.AlertType.INFORMATION);
                 break;
+
             default:
                 showAlert("Error", "Invalid account type.", Alert.AlertType.WARNING);
                 return;
         }
 
-        showAlert("Account creation", "Account created for " + name, Alert.AlertType.INFORMATION);
+        // Show confirmation for non-Fixed accounts
+        if (!(currentAccount instanceof FixedDepositAccount)) {
+            showAlert("Account Creation", "Account created for " + name, Alert.AlertType.INFORMATION);
+        }
+
         refreshTransactionTable();
     }
 

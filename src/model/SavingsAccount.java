@@ -28,7 +28,8 @@ public class SavingsAccount extends BankAccount {
     }
 
     // Interest calculation for savings account
-    public double calculateInterest(double rate) {
-        return this.balance * (rate / 100);
+    public double calculateInterest() {
+        double interestRate = 2.0; // 2% as example
+        return (getBalance() * interestRate) / 100;
     }
 }
