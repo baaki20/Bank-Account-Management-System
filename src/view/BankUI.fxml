@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.BankController">
+    <top>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Create Bank Account" style="-fx-font-size: 16px;"/>
+            <HBox spacing="10">
+                <TextField fx:id="nameField" promptText="Account Holder Name"/>
+                <TextField fx:id="initialBalanceField" promptText="Initial Balance"/>
+                <ComboBox fx:id="accountTypeBox" promptText="Account Type"/>
+                <Button text="Create Account" onAction="#handleCreateAccount"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Perform Transaction" style="-fx-font-size: 16px;"/>
+            <HBox spacing="10">
+                <TextField fx:id="transactionAmountField" promptText="Amount"/>
+                <Button text="Deposit" onAction="#handleDeposit"/>
+                <Button text="Withdraw" onAction="#handleWithdraw"/>
+                <Button text="Check Balance" onAction="#handleCheckBalance"/>
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Transaction History" style="-fx-font-size: 16px;"/>
+            <TableView fx:id="transactionTable">
+                <columns>
+                    <TableColumn fx:id="dateColumn" text="Date"/>
+                    <TableColumn fx:id="typeColumn" text="Type"/>
+                    <TableColumn fx:id="amountColumn" text="Amount"/>
+                    <TableColumn fx:id="balanceColumn" text="Balance After"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </bottom>
+</BorderPane>
